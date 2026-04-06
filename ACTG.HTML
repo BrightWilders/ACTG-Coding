@@ -145,6 +145,7 @@
         <tr><td>Waste Removal</td><td>7906</td><td><input type="number" id="waste" value="1682"></td><td>Laundry</td><td>BLDG 7</td></tr>
         <tr><td>Water</td><td>7902</td><td><input type="number" id="water" value="4500"></td><td>Laundry</td><td>BLDG 7</td></tr>
         <tr><td>Sewer</td><td>7902</td><td><input type="number" id="sewer" value="6000"></td><td>Laundry</td><td>BLDG 7</td></tr>
+        <tr><td>Rent</td><td>7400</td><td><input type="number" id="rent" value="0"></td><td>Housekeeping - 310</td><td>BLDG 7</td></tr>
       </tbody>
     </table>
     <button class="calc" onclick="calculateBKW()">Calculate Utility Allocation</button>
@@ -181,7 +182,8 @@
         { label: "Propane", gl: "7905", amount: parseFloat(document.getElementById("propane").value) || 0, dept: "Laundry", class: "BLDG 7" },
         { label: "Waste Removal", gl: "7906", amount: parseFloat(document.getElementById("waste").value) || 0, dept: "Laundry", class: "BLDG 7" },
         { label: "Water", gl: "7902", amount: parseFloat(document.getElementById("water").value) || 0, dept: "Laundry", class: "BLDG 7" },
-        { label: "Sewer", gl: "7902", amount: parseFloat(document.getElementById("sewer").value) || 0, dept: "Laundry", class: "BLDG 7" }
+        { label: "Sewer", gl: "7902", amount: parseFloat(document.getElementById("sewer").value) || 0, dept: "Laundry", class: "BLDG 7" },
+        { label: "Rent", gl: "7400", amount: parseFloat(document.getElementById("rent").value) || 0, dept: "Housekeeping - 310", class: "BLDG 7" }
       ];
 
       let fullTable = `
