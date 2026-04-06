@@ -105,10 +105,10 @@
 <body>
 
   <div id="intro" class="intro">
-    <img src="Brightwild_Workable_1200x1200.png">
+    <img src="Brightwild_Workable_1200x1200.png" alt="Brightwild Logo">
     <div class="quote">Dominate the day Accounting Team</div>
     <div class="menu">
-      <button onclick="showSection('bkw', this)">BKW Utility</button>
+      <button onclick="showSection('bkw')">BKW Utility</button>
     </div>
   </div>
 
@@ -132,7 +132,7 @@
         <tr><td>Waste Removal</td><td>7906</td><td><input type="number" id="waste" value="1682"></td><td>Laundry</td><td>BLDG 7</td></tr>
         <tr><td>Water</td><td>7902</td><td><input type="number" id="water" value="4500"></td><td>Laundry</td><td>BLDG 7</td></tr>
         <tr><td>Sewer</td><td>7902</td><td><input type="number" id="sewer" value="6000"></td><td>Laundry</td><td>BLDG 7</td></tr>
-        <tr><td>Rent</td><td>7400</td><td><input type="number" id="rent" value="0"></td><td>Housekeeping - 310</td><td>BLDG 7</td></tr>
+        <tr><td>Rent</td><td>7400</td><td><input type="number" id="rent" value="7568"></td><td>Housekeeping - 310</td><td>BLDG 7</td></tr>
       </tbody>
     </table>
 
@@ -152,7 +152,10 @@
     }
 
     function formatNumber(num) {
-      return num.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      return num.toLocaleString(undefined, {
+        minimumFractionDigits: 2,
+        maximumFractionDigits: 2
+      });
     }
 
     function calculateBKW() {
@@ -187,16 +190,21 @@
         total += i.amount;
       });
 
+      const sortedGLs = Object.keys(summary)
+        .filter(gl => gl !== "7400")
+        .sort((a, b) => Number(a) - Number(b))
+        .concat("7400");
+
       let summaryTable = `
         <h3>Summary by GL</h3>
         <table>
           <tr><th>GL</th><th>Total</th></tr>
-          ${Object.entries(summary).map(([gl, amt]) => `
-            <tr>
+          ${sortedGLs.map(gl => `
+            <tr ${gl === "7400" ? 'style="font-weight:bold;background:#eef3f7;"' : ''}>
               <td>${gl}</td>
-              <td>$${formatNumber(amt)}</td>
+              <td>$${formatNumber(summary[gl])}</td>
             </tr>`).join('')}
-          <tr style="font-weight:bold;background:#eef3f7;">
+          <tr style="font-weight:bold;background:#dfe6ec;">
             <td>TOTAL</td>
             <td>$${formatNumber(total)}</td>
           </tr>
